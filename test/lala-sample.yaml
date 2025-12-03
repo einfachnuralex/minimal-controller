@@ -1,0 +1,8 @@
+apiVersion: lala.psydev.eu/v1alpha1
+kind: Lala
+metadata:
+  name: lala-1234
+  namespace: default
+spec:
+  name: bb18a292-cf6c-11f0-9137-677dd2ac81a6
+  reason: "Lala was created by the user"

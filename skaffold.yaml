@@ -1,0 +1,19 @@
+apiVersion: skaffold/v4beta12
+kind: Config
+metadata:
+  name: minimal-controller
+build:
+  local:
+    useDockerCLI: true
+    push: false
+  artifacts:
+    - image: ghcr.io/einfachnuralex/minimal-controller
+      context: .
+      docker:
+        dockerfile: ./cmd/operator/Dockerfile
+
+manifests:
+  rawYaml:
+    - crds/lala.psydev.eu_lalas.yaml
+    - test/controller.yaml
+    - test/lala-sample.yaml

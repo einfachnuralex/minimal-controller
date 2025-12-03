@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minimal-controller
+  namespace: default
+  labels:
+    app: minimal-controller
+spec:
+  selector:
+    matchLabels:
+      app: minimal-controller
+  template:
+    metadata:
+      labels:
+        app: minimal-controller
+    spec:
+      serviceAccountName: minimal-controller
+      containers:
+      - name: minimal-controller
+        image: ghcr.io/einfachnuralex/minimal-controller
+        args:
+        - "--instance=lala"
+        ports:
+          - name: http
+            containerPort: 8080
+            
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minimal-controller
+  namespace: default
+spec:
+  selector:
+    app: minimal-controller
+  type: 
+  ports:
+  - name: minimal-controller
+    protocol: TCP
+    port: 80
+    targetPort: http
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: minimal-controller
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: minimal-controller
+rules:
+- apiGroups: 
+  - lala.psydev.eu
+  resources: 
+  - lalas
+  - lalas/status
+  verbs:
+  - "*"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: minimal-controller
+subjects:
+- kind: ServiceAccount
+  name: minimal-controller
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: minimal-controller
+  apiGroup: rbac.authorization.k8s.io
