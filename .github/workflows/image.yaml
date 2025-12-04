@@ -17,6 +17,14 @@ jobs:
       packages: write
 
     steps:
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -37,5 +45,5 @@ jobs:
           file: ./cmd/operator/Dockerfile
           push: true
           tags: |
-            ${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           platforms: linux/amd64,linux/arm64
