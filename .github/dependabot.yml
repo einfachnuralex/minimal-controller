@@ -19,7 +19,7 @@ updates:
       - "einfachnuralex"
   - package-ecosystem: "docker"
     directories:
-      - "**/Dockerfile"
+      - "**/*"
     schedule:
       interval: "daily"
     reviewers:
