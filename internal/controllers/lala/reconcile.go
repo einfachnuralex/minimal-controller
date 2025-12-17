@@ -22,7 +22,7 @@ func (r *Reconciler) Reconcile(ctx context.Context, req reconcile.Request) (reco
 
 	entry := &lalav1alpha1.Lala{}
 	if err := r.client.Get(ctx, req.NamespacedName, entry); err != nil {
-		return reconcile.Result{}, err
+		return reconcile.Result{}, client.IgnoreNotFound(err)
 	}
 
 	// Set the instance ID if it's not already set
