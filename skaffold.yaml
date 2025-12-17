@@ -13,7 +13,6 @@ build:
         dockerfile: ./cmd/operator/Dockerfile
 
 manifests:
-  rawYaml:
-    - crds/lala.psydev.eu_lalas.yaml
-    - test/controller.yaml
-    - test/lala-sample.yaml
+  kustomize:
+    paths:
+      - config/
