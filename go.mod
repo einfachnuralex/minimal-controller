@@ -4,7 +4,7 @@ go 1.25.1
 
 require (
 	github.com/onsi/ginkgo/v2 v2.27.3
-	github.com/onsi/gomega v1.38.3
+	github.com/onsi/gomega v1.39.0
 	k8s.io/apimachinery v0.34.3
 	k8s.io/client-go v0.34.3
 	sigs.k8s.io/controller-runtime v0.22.4
